@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function GPTCard({ gpt }) {
   return (
     <div className="bg-[#1a1a1a] border border-[#333333] rounded-lg p-4 hover:border-[#555555] transition cursor-pointer group">
@@ -14,3 +16,13 @@ export default function GPTCard({ gpt }) {
     </div>
   )
 }
+
+GPTCard.propTypes = {
+  gpt: PropTypes.shape({
+    icon: PropTypes.node.isRequired,
+    bgColor: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    creator: PropTypes.string.isRequired,
+  }).isRequired,
+};

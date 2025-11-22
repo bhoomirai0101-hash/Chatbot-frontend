@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Button({ 
   children, 
   variant = 'primary', 
@@ -20,4 +22,10 @@ export default function Button({
       {children}
     </button>
   );
+}
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'ghost']),
+  className: PropTypes.string,
 }

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function TabButton({ 
   active = false, 
   children,
@@ -15,4 +17,9 @@ export default function TabButton({
       {children}
     </button>
   );
+}
+
+TabButton.propTypes = {
+  active: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 }

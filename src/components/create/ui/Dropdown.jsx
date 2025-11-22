@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Dropdown({ 
   label = '',
   options = [],
@@ -17,4 +19,10 @@ export default function Dropdown({
       ))}
     </select>
   );
+}
+
+Dropdown.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string),
+  defaultValue: PropTypes.string,
 }

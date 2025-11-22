@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function TrendingCard({ item }) {
   return (
     <div className="bg-[#1a1a1a] border border-[#2b2b2b] rounded-lg p-4 hover:border-[#444444] transition cursor-pointer">
@@ -26,3 +28,19 @@ export default function TrendingCard({ item }) {
     </div>
   )
 }
+
+TrendingCard.propTypes = {
+  item: PropTypes.shape({
+    icon: PropTypes.node.isRequired,
+    title: PropTypes.string.isRequired,
+    rank: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    creator: PropTypes.string.isRequired,
+    badges: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+      })
+    ),
+  }).isRequired,
+};

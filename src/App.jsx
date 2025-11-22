@@ -5,6 +5,7 @@ import AuthProvider from './components/AuthProvider';
 import Login from './pages/Login';
 import AuthCallback from './pages/AuthCallback';
 import Home from './pages/Home';
+import GPTConfig from './pages/create/GPTConfig';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
@@ -15,15 +16,24 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRoute>
                   <Home />
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path="/create"
+              element={
+                <ProtectedRoute>
+                  <GPTConfig />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </Router>
       </AuthProvider>

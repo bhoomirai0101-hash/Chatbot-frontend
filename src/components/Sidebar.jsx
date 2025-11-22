@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import PropTypes from "prop-types"
 
 export default function Sidebar({ onNavigate, currentPage }) {
   const [activeMenu, setActiveMenu] = useState("new-chat")
@@ -113,4 +114,9 @@ export default function Sidebar({ onNavigate, currentPage }) {
       </div>
     </aside>
   )
+}
+
+Sidebar.propTypes = {
+  onNavigate: PropTypes.func.isRequired,
+  currentPage: PropTypes.string,
 }

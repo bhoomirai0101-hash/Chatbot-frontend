@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function TextArea({ 
   placeholder = '',
   className = '',
@@ -10,4 +12,9 @@ export default function TextArea({
       {...props}
     />
   );
+}
+
+TextArea.propTypes = {
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
 }

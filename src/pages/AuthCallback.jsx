@@ -13,6 +13,9 @@ export default function AuthCallback() {
     const token = searchParams.get('token');
     const userParam = searchParams.get('user');
     
+    console.log('AuthCallback - token:', token);
+    console.log('AuthCallback - userParam:', userParam);
+    
     if (!token || !userParam) {
       console.error('No token or user data found');
       setError('Authentication failed: Missing credentials');
@@ -23,6 +26,7 @@ export default function AuthCallback() {
     try {
       // Parse user data from URL parameter
       const user = JSON.parse(decodeURIComponent(userParam));
+      console.log('AuthCallback - parsed user:', user);
       
       // Store credentials in Redux store and localStorage
       dispatch(setCredentials({
@@ -30,8 +34,10 @@ export default function AuthCallback() {
         token,
       }));
 
-      // Redirect to home page
-      navigate('/');
+      console.log('AuthCallback - credentials set, navigating to /home');
+      
+      // Redirect to home page immediately
+      navigate('/home', { replace: true });
     } catch (err) {
       console.error('Authentication failed:', err);
       setError('Authentication failed: Invalid data');

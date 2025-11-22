@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Checkbox({ 
   label = '',
   checked = false,
@@ -14,4 +16,9 @@ export default function Checkbox({
       <span className="text-gray-300">{label}</span>
     </label>
   );
+}
+
+Checkbox.propTypes = {
+  label: PropTypes.string,
+  checked: PropTypes.bool,
 }
