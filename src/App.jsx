@@ -1,31 +1,32 @@
-import Sidebar from './components/Sidebar'
-import Header from './components/Header'
-import SearchBar from './components/SearchBar'
-import CategoryTabs from './components/CategoryTabs'
-import FeaturedSection from './components/FeaturedSection'
-import TrendingSection from './components/TrendingSection'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import AuthProvider from './components/AuthProvider';
+import Login from './pages/Login';
+import AuthCallback from './pages/AuthCallback';
+import Home from './pages/Home';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   return (
-    <div className="flex h-screen bg-[#0d0d0d]">
-      <Sidebar />
-      <main className="flex-1 overflow-y-auto">
-        <Header />
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4">GPTs</h1>
-            <p className="text-gray-400 text-lg">
-              Discover and create custom versions of ChatGPT that combine instructions, extra knowledge,
-              and any combination of skills.
-            </p>
-          </div>
-          
-          <SearchBar />
-          <CategoryTabs />
-          <FeaturedSection />
-          <TrendingSection />
-        </div>
-      </main>
-    </div>
+    <Provider store={store}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </Provider>
   )
 }
