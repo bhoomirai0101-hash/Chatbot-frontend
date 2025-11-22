@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '../store/authSlice';
+import { API_CONFIG } from '../config/api.config';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Login() {
 
   const handleMicrosoftLogin = () => {
     // Redirect to backend auth endpoint which will redirect to Microsoft
-    globalThis.location.href = 'http://localhost:8000/auth/login';
+    globalThis.location.href = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.AUTH.LOGIN}`;
   };
 
   return (

@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const BASE_URL = 'http://localhost:8000';
+import { API_CONFIG } from '../config/api.config';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
+    baseUrl: API_CONFIG.BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
@@ -18,7 +17,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     // Get Microsoft login URL
     getLoginUrl: builder.query({
-      query: () => '/auth/login',
+      query: () => API_CONFIG.ENDPOINTS.AUTH.LOGIN,
       transformResponse: (response) => {
         // This will be a redirect, so we handle it differently
         return response;
@@ -28,7 +27,7 @@ export const authApi = createApi({
     // Handle OAuth callback
     handleCallback: builder.mutation({
       query: (code) => ({
-        url: `/auth/callback?code=${code}`,
+        url: `${API_CONFIG.ENDPOINTS.AUTH.CALLBACK}?code=${code}`,
         method: 'GET',
       }),
       invalidatesTags: ['User'],
@@ -36,14 +35,14 @@ export const authApi = createApi({
     
     // Get current user info
     getCurrentUser: builder.query({
-      query: () => '/auth/me',
+      query: () => API_CONFIG.ENDPOINTS.AUTH.CURRENT_USER,
       providesTags: ['User'],
     }),
     
     // Logout
     logout: builder.mutation({
       query: () => ({
-        url: '/auth/logout',
+        url: API_CONFIG.ENDPOINTS.AUTH.LOGOUT,
         method: 'GET',
       }),
       invalidatesTags: ['User'],

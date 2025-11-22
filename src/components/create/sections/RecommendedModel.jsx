@@ -1,6 +1,15 @@
-import Dropdown from '../ui/Dropdown';
+import { useChatbotForm } from '../../../context/ChatbotFormContext';
 
 export default function RecommendedModel() {
+  const { formData, updateField } = useChatbotForm();
+
+  const models = [
+    { value: '', label: 'No Recommended Model' },
+    { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+    { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
+    { value: 'gemini-2.0-flash-exp', label: 'Gemini 2.0 Flash (Experimental)' },
+  ];
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
@@ -10,11 +19,19 @@ export default function RecommendedModel() {
         </svg>
       </div>
       <p className="text-xs text-gray-400">
-        Recommend a model to the user, which should be used by default for best results.
+        Select a model that will be used by default for best results.
       </p>
-      <Dropdown 
-        options={['No Recommended Model - Users will use any model they prefer', 'GPT-4 Turbo', 'GPT-4', 'GPT-3.5']}
-      />
+      <select
+        value={formData.recommended_model}
+        onChange={(e) => updateField('recommended_model', e.target.value)}
+        className="w-full bg-[#2a2a2a] border border-[#3a3a3a] text-white px-4 py-2 rounded-lg outline-none focus:border-[#4a4a4a] transition text-sm"
+      >
+        {models.map(model => (
+          <option key={model.value} value={model.value}>
+            {model.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

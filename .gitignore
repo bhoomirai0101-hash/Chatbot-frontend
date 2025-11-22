@@ -12,6 +12,28 @@ dist
 dist-ssr
 *.local
 
+# Build output
+build/
+
+# Vite cache
+.vite/
+
+# Local env files
+.env*
+
+# Coverage
+coverage/
+
+# Storybook build outputs
+out/
+storybook-static/
+
+# SASS cache
+.sass-cache/
+
+# ESLint cache
+.eslintcache
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +44,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Mac system files
+*.DS_Store
+
+# Windows system files
+*.Thumbs.db
+
+# IDE files
+.idea/
+
+# Optional npm cache directory
+.npm/
+
+# Test output
+*.test-results.json
